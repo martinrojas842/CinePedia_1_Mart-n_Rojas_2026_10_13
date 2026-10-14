@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>CinePedia - Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header class="header-dashboard">
+            <h1>Bienvenido, {{ session['nombre_usuario'] }}</h1>
+            <div class="nav-links">
+                <a href="/cine/nueva" class="btn-link">Nueva Peli</a>
+                <a href="/logout" class="btn-link">Cerrar Sesión</a>
+            </div>
+        </header>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Película</th>
+                        <th>Director</th>
+                        <th>Fecha de Estreno</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for peli in peliculas %}
+                    <tr>
+                        <td>{{ peli.nombre }}</td>
+                        <td>{{ peli.director }}</td>
+                        <td>{{ peli.fecha_estreno.strftime('%Y-%m-%d') }}</td>
+                        <td>
+                            <a href="/cine/{{ peli.id }}">Ver</a>
+                            {% if peli.usuario_id == session['usuario_id'] %}
+                                | <a href="/cine/editar/{{ peli.id }}">Editar</a>
+                                | <a href="/cine/borrar/{{ peli.id }}" onclick="return confirm('¿Estás seguro de borrar esta película?');">Borrar</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

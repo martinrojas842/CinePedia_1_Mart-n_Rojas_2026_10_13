@@ -1,0 +1,247 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: #f7f5f0; /* Fondo marfil/papel suave, muy cinematográfico */
+    color: #2b2b2b;
+    line-height: 1.6;
+    padding: 30px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 35px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e6e2d8;
+}
+
+/* Títulos con toque de cartelera o libro clásico */
+h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
+    color: #111111;
+    margin-bottom: 20px;
+    letter-spacing: -0.5px;
+}
+
+h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
+/* Auth Sections (Login y Registro) */
+.auth-sections {
+    display: flex;
+    gap: 40px;
+    margin-top: 20px;
+}
+
+.form-box {
+    flex: 1;
+    background: #fbfaf7;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #ede8dc;
+}
+
+/* Formularios generales */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+label {
+    font-weight: 500;
+    font-size: 0.85rem;
+    color: #555555;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="date"],
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d4cfc4;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: #fff;
+    transition: all 0.2s;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: #991b1b; /* Rojo carmesí cinematográfico */
+    box-shadow: 0 0 0 3px rgba(153, 27, 27, 0.1);
+}
+
+/* Botones principales con tono rojo clásico de butaca de cine / alfombra */
+button[type="submit"] {
+    background-color: #991b1b;
+    color: white;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.2s;
+}
+
+button[type="submit"]:hover {
+    background-color: #7f1d1d;
+}
+
+/* Mensajes de error (Flash) */
+.alert-error {
+    background-color: #fef2f2;
+    border: 1px solid #fca5a5;
+    color: #991b1b;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+}
+
+/* Header del Dashboard */
+.header-dashboard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #f0ece1;
+    padding-bottom: 18px;
+    margin-bottom: 25px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 15px;
+}
+
+.btn-link {
+    text-decoration: none;
+    background-color: #f0ece1;
+    color: #2b2b2b;
+    padding: 9px 16px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.btn-link:hover {
+    background-color: #e4decf;
+}
+
+/* Tablas */
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    padding: 14px 16px;
+    text-align: left;
+    border-bottom: 1px solid #f0ece1;
+}
+
+th {
+    background-color: #fbfaf7;
+    font-weight: 600;
+    color: #444444;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+tr:hover {
+    background-color: #fbfaf7;
+}
+
+td a {
+    color: #991b1b;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+td a:hover {
+    text-decoration: underline;
+}
+
+/* Detalle de película */
+.movie-detail-box {
+    background: #fbfaf7;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #ede8dc;
+    margin-bottom: 25px;
+}
+
+.sinopsis-text {
+    margin-top: 10px;
+    background: #ffffff;
+    padding: 18px;
+    border-radius: 8px;
+    border: 1px solid #e6e2d8;
+}
+
+/* Comentarios */
+.comments-section {
+    margin-top: 35px;
+}
+
+.comment-form {
+    margin-bottom: 20px;
+}
+
+.comments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.comment-card {
+    background: #fbfaf7;
+    padding: 18px;
+    border-radius: 10px;
+    border: 1px solid #ede8dc;
+    position: relative;
+}
+
+.btn-delete-comment {
+    display: inline-block;
+    margin-top: 8px;
+    color: #b91c1c;
+    font-size: 0.85rem;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.btn-delete-comment:hover {
+    text-decoration: underline;
+}
+
+.notice-msg {
+    color: #666666;
+    margin-bottom: 15px;
+    font-style: italic;
+}

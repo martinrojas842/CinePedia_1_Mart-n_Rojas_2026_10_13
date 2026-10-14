@@ -1,0 +1,71 @@
+<!-- Vista detallada de una película con su información y sección de comentarios -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>CinePedia - Detalle de Película</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header class="header-dashboard">
+            <h1>CinePedia</h1>
+            <div class="nav-links">
+                <a href="/cine" class="btn-link">Inicio</a>
+                <a href="/logout" class="btn-link">Cerrar Sesión</a>
+            </div>
+        </header>
+
+        <!-- Tarjeta con la información principal de la película -->
+        <div class="movie-detail-box">
+            <h2>{{ pelicula.nombre }}</h2>
+            <p><strong>Publicado por:</strong> {{ pelicula.creador_nombre }}</p>
+            <p><strong>Director:</strong> {{ pelicula.director }}</p>
+            <p><strong>Fecha de Estreno:</strong> {{ pelicula.fecha_estreno.strftime('%Y-%m-%d') }}</p>
+            <p><strong>Sinopsis:</strong></p>
+            <p class="sinopsis-text">{{ pelicula.sinopsis }}</p>
+        </div>
+
+        <!-- Sección interactiva de comentarios -->
+        <div class="comments-section">
+            <h3>Comentarios</h3>
+            
+            {% with messages = get_flashed_messages(category_filter=['comentario']) %}
+                {% if messages %}
+                    <div class="alert-error">
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            <!-- El creador de la película no puede comentar en su propia publicación -->
+            {% if pelicula.usuario_id != session['usuario_id'] %}
+            <form action="/comentario/crear" method="POST" class="comment-form">
+                <input type="hidden" name="pelicula_id" value="{{ pelicula.id }}">
+                <textarea name="contenido" placeholder="Escribe un comentario..." rows="3"></textarea>
+                <button type="submit">Enviar</button>
+            </form>
+            {% else %}
+            <p class="notice-msg"><em>No puedes comentar tu propia película.</em></p>
+            {% endif %}
+
+            <!-- Listado de comentarios de los usuarios -->
+            <div class="comments-list">
+                {% for com in comentarios %}
+                <div class="comment-card">
+                    <p><strong>{{ com.autor_nombre }}</strong> - {{ com.created_at.strftime('%d de %B') }}</p>
+                    <p>{{ com.contenido }}</p>
+                    
+                    <!-- Permite borrar el comentario solo si pertenece al usuario conectado -->
+                    {% if com.usuario_id == session['usuario_id'] %}
+                        <a href="/comentario/borrar/{{ com.id }}/{{ pelicula.id }}" class="btn-delete-comment">Borrar</a>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

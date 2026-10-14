@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>CinePedia - Editar Película</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header class="header-dashboard">
+            <h1>Editar Película</h1>
+            <div class="nav-links">
+                <a href="/cine" class="btn-link">Inicio</a>
+                <a href="/logout" class="btn-link">Cerrar Sesión</a>
+            </div>
+        </header>
+
+        <div class="form-container">
+            {% with messages = get_flashed_messages(category_filter=['pelicula']) %}
+                {% if messages %}
+                    <div class="alert-error">
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            <form action="/cine/actualizar/{{ pelicula.id }}" method="POST">
+                <label>Nombre de Peli:</label>
+                <input type="text" name="nombre" value="{{ request.form['nombre'] if request.form else pelicula.nombre }}">
+
+                <label>Director:</label>
+                <input type="text" name="director" value="{{ request.form['director'] if request.form else pelicula.director }}">
+
+                <label>Fecha Estreno:</label>
+                <input type="date" name="fecha_estreno" value="{{ request.form['fecha_estreno'] if request.form else pelicula.fecha_estreno.strftime('%Y-%m-%d') }}">
+
+                <label>Sinopsis:</label>
+                <textarea name="sinopsis" rows="5">{{ request.form['sinopsis'] if request.form else pelicula.sinopsis }}</textarea>
+
+                <button type="submit">Guardar Película</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
